@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Template 2</title>
+<style>
+
+.header h5 {
+ position: relative;
+ top: 30px;
+ left: 10px;
+}
+header
+{
+ background-color:#ECF3F3;
+}
+</style>     
+  <meta name="description" content="Pushy is an off-canvas navigation menu for your website.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/demo.css">
+        <!-- Pushy CSS -->
+        <link rel="stylesheet" href="css/pushy.css">
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+ 
+
+        <header>
+<button class="menu-btn"> &#9776; Menu</button>
+<center>
+<img src="images/logo .png" style="width:100px;height=5px;"/><h1>Ministry Of Electronic & Communication</h1>
+</center>
+</header>
+
+        <!-- Pushy Menu -->
+        <nav class="pushy pushy-left" data-focus="#first-link">
+            <div class="pushy-content">
+                <ul>
+                    <li class="pushy-submenu">
+                        <button id="first-link">Submenu 1</button>
+                        <ul>
+                            <li class="pushy-link"><a href="#">Item 1</a></li>
+                            <li class="pushy-link"><a href="#">Item 2</a></li>
+                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="pushy-submenu">
+                        <button>Submenu 2</button>
+                        <ul>
+                            <li class="pushy-link"><a href="#">Item 1</a></li>
+                            <li class="pushy-link"><a href="#">Item 2</a></li>
+                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="pushy-submenu">
+                        <button>Submenu 3</button>
+                        <ul>
+                            <li class="pushy-link"><a href="#">Item 1</a></li>
+                            <li class="pushy-link"><a href="#">Item 2</a></li>
+                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="pushy-submenu">
+                        <button>Submenu 4</button>
+                        <ul>
+                            <li class="pushy-link"><a href="#">Item 1</a></li>
+                            <li class="pushy-link"><a href="#">Item 2</a></li>
+                            <li class="pushy-link"><a href="#">Item 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="pushy-link"><a href="#">Item 1</a></li>
+                    <li class="pushy-link"><a href="#">Item 2</a></li>
+                    <li class="pushy-link"><a href="#">Item 3</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Site Overlay -->
+        <div class="site-overlay"></div>
+<center>	
+<div class="w3-content w3-section" style="max-width:1200px;">
+  <img class="mySlides" src="images/EDUCATION1.jpg" style="width:100%">
+  <img class="mySlides" src="images/eDUCATION2.jpg" style="width:100%">
+  <img class="mySlides" src="images/EDUCATION3.jpg" style="width:100%">
+</div>
+<center>
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script>
+        <!-- Your Content -->
+<main class="flex">
+      <div class="card">
+        <h2 class="card-title">Background</h2>
+        <ul>
+            <li>I’m an aspiring web designer who loves everything about the web. I've lived in lots of different places and have worked in lots of different jobs.</li>
+            <li>I’m excited to bring my life experience to the process of building fantastic looking websites.</li>
+            <li>I’ve been a professional cook and gardener and am a life-long learner who's always interested in expanding my skills.</li>
+            <li>To learn more, <a href="resume.html">view my resume.</a></li>
+         </ul>
+         <h3>A New Subsection</h3>
+      </div> 
+      <div class="card">
+        <h2 class="card-title">Goals</h2>
+        <p>I want to master the process of building web sites and increase my knowledge, skills and abilities in:</p>
+        <ul class="skills">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Ruby</li>
+          <li>Rails</li>
+        </ul>
+        <p>I’d like to work for a web design firm helping clients create an impressive online presence.</p>
+      </div> 
+	      <div class="card">
+        <h2 class="card-title">Background</h2>
+        <ul>
+            <li>I’m an aspiring web designer who loves everything about the web. I've lived in lots of different places and have worked in lots of different jobs.</li>
+            <li>I’m excited to bring my life experience to the process of building fantastic looking websites.</li>
+            <li>I’ve been a professional cook and gardener and am a life-long learner who's always interested in expanding my skills.</li>
+            <li>To learn more, <a href="resume.html">view my resume.</a></li>
+         </ul>
+         <h3>A New Subsection</h3>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Goals</h2>
+        <p>I want to master the process of building web sites and increase my knowledge, skills and abilities in:</p>
+        <ul class="skills">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Ruby</li>
+          <li>Rails</li>
+        </ul>
+        <p>I’d like to work for a web design firm helping clients create an impressive online presence.</p>
+      </div> 
+			
+    </main>
+<!-- Marquee Slide Stop text by Way2Tutorial.com -->
+
+
+<marquee behavior="sroll" direction="left">
+<img src="images/eDUCATION2.jpg" width="10%"  alt="Natural" />
+<img src="images/eDUCATION2.jpg" width="10%"  alt="Natural" />
+<img src="images/eDUCATION2.jpg" width="10%"  alt="Natural" />
+<img src="images/eDUCATION2.jpg" width="10%"  alt="Natural" />
+<img src="images/eDUCATION2.jpg" width="10%"  alt="Natural" />
+<img src="images/eDUCATION2.jpg" width="10%"  alt="Natural" />
+<img src="images/eDUCATION2.jpg" width="10%"  alt="Natural" />
+<img src="images/eDUCATION2.jpg" width="10%"  alt="Natural" />
+</marquee>
+
+        <footer class="footer-basic-centered">
+<p class="footer-company-motto"> Ministry of Electronic and Communication</p>
+<p class="footer-links">
+<a href="#">Item 1</a>
+|
+<a href="#">Item 2</a>
+|
+<a href="#">Item 3</a>
+|
+<a href="#">Item 4</a>
+|
+<a href="#">Item 5</a>
+</p>
+<p style="color:white;">Designed & Developed By CDAC</p>				
+</footer>
+
+        <!-- Pushy JS -->
+        <script src="js/pushy.min.js"></script>
+
+    </body>
+</html>

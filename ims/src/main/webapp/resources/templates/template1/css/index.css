@@ -1,0 +1,60 @@
+.card {
+
+  padding: 20px 40px 40px;
+  max-width: 1000px;
+  text-align: left;
+
+  border-bottom: 4px solid #ccc;
+  border-radius: 6px;
+}
+.card:hover {
+  border-color: #ff99ff;
+}
+.body-color
+{
+	background-color:#999999;
+	
+}
+.navbar-collapse{
+  background: #47c9af;
+}
+
+/* Styles for larger screens */
+@media screen and (min-width: 720px) {
+  
+  .flex
+  {
+      display: flex;
+      max-width: 1800px;
+      justify-content: space-around;
+      margin: 0 auto;
+  }
+.card-title {
+    text-align: center;
+    border: solid black 3px;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 1200px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 1200px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1450px;
+  }
+  
+  
+}
