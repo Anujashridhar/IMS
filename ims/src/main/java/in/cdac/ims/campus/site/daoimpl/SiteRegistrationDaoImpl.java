@@ -7,6 +7,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import in.cdac.db.auth.entity.User;
@@ -22,7 +23,8 @@ public class SiteRegistrationDaoImpl implements SiteRegistrationDao{
 
 	@Autowired
 	SessionFactory sessionFactory;
-	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	public ResultDataMap saveSiteDetails(SiteRegistrationDetail site) {
 		Session session=null;
@@ -37,7 +39,7 @@ public class SiteRegistrationDaoImpl implements SiteRegistrationDao{
 		user.setDateOfModification(new Date());
 		String password=RandomStringUtils.randomAlphanumeric(8);
 		
-		user.setPassword(password);
+		user.setPassword(passwordEncoder.encode(password));
 		user.setUserEmail(site.getContactEmail());
 		user.setUserContactNo(site.getContactNumber());
 		user.setUserName(site.getName());

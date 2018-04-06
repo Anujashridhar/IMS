@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ import in.cdac.util.Utility;
 @Transactional
 public class UserServiceImpl implements UserService{
 
+	@Autowired
+	PasswordEncoder encoder;
+	
 	@Autowired
 	UserDao userdao;
 	String password;
@@ -74,7 +78,7 @@ public class UserServiceImpl implements UserService{
 			if(user.getPassword()!=null && user.getPassword().trim().equals(""))
 			{
 				 password=RandomStringUtils.randomAlphanumeric(8);
-				user.setPassword(password);
+				user.setPassword(encoder.encode(password));
 				mailer=" User registered successfully your password is :"+password;
 			}else {
 				tocken=RandomStringUtils.randomAlphanumeric(30);

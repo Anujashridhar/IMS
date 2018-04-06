@@ -120,11 +120,8 @@ public class PasswordController {
 		{
 			if (password1 != null && password1.trim() != "" && password2 != null && password2.trim() != "" && password1.equals(password2)) 
 			{
-				System.out.println(password1);
-				user.setPassword(password2);
-				user.setModifiedBy(user.getUserId());
-				user.setDateOfModification(new Date());
-				ResultDataMap rdm=userService.updateUser(user);
+			
+				ResultDataMap rdm=userService.changePassword(password2,user.getUserId());
 				if(rdm.getStatus())
 				{
 					mav.addObject("message",Strings.passwordChanged);

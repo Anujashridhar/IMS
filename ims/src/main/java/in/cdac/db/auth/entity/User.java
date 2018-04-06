@@ -42,7 +42,7 @@ public class User implements Serializable{
 	private Integer userId;
 	private Integer siteId;
 	@NotNull(message=" name is required")
-	@Size(min=5,message="min size is 5")
+	@Size(min=5,message="min size is 2")
 	private String userName;
 	private String password;
 	private Character activeFlag;

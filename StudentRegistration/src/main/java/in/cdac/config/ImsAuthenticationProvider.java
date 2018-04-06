@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import in.cdac.auth.login.service.LoginService;
@@ -24,7 +25,8 @@ import in.cdac.db.auth.entity.User;
 @Component
 public class ImsAuthenticationProvider implements AuthenticationProvider {
 
-	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	HttpSession httpSession;
@@ -46,7 +48,7 @@ public class ImsAuthenticationProvider implements AuthenticationProvider {
     		//request.getSession().setAttribute("errormsg", "");
     		//request.getSession().setAttribute("msgPass", "Bad Credentials.");
             throw new UsernameNotFoundException(authentication.getName()+"not found ");
-        }else if(user.getPassword().equals(password))
+        }else if(passwordEncoder.matches(password, user.getPassword()))
 				{
         				if(user.getEmailVerifiedFlag()!=null && user.getEmailVerifiedFlag().equals('Y'))
         				{

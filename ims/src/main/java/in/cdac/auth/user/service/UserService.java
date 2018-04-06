@@ -35,5 +35,6 @@ public interface UserService {
 	public ResultDataMap resetPassword(String tockenNo, String password1);
 	public Tocken ifValidTocken(String tockenNo,String typeOfTocken);
 	public ResultDataMap updateUser(User user);
+	public ResultDataMap changePassword(String password2, Integer userId);
 	
 }

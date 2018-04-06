@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import in.cdac.auth.login.service.LoginService;
@@ -23,7 +24,8 @@ import in.cdac.db.auth.entity.User;
 @Component
 public class ImsAuthenticationProvider implements AuthenticationProvider {
 
-	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	HttpSession httpSession;
@@ -45,7 +47,8 @@ public class ImsAuthenticationProvider implements AuthenticationProvider {
     		//request.getSession().setAttribute("errormsg", "");
     		//request.getSession().setAttribute("msgPass", "Bad Credentials.");
             throw new BadCredentialsException("Bad Credentials.");
-        }else if(user.getPassword().equals(password))
+            
+        }else if(passwordEncoder.matches(password,user.getPassword()))
 				{
         
         			authorities = userService.getUserAuthorities(user.getUserId());
@@ -75,6 +78,14 @@ public class ImsAuthenticationProvider implements AuthenticationProvider {
 	public ImsAuthenticationProvider(HttpServletRequest request) {
 		super();
 		this.request = request;
+	}
+
+	public PasswordEncoder getPasswordEncoder() {
+		return passwordEncoder;
+	}
+
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
 	}
 
 

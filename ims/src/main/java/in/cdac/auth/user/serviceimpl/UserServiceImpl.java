@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,9 @@ import in.cdac.util.Utility;
 @Transactional
 public class UserServiceImpl implements UserService{
 
+	@Autowired
+	PasswordEncoder encoder;
+	
 	@Autowired
 	UserDao userdao;
 	
@@ -78,7 +83,8 @@ public class UserServiceImpl implements UserService{
 			if(user.getPassword()!=null && user.getPassword().trim().equals(""))
 			{
 				 password=RandomStringUtils.randomAlphanumeric(8);
-				user.setPassword(password);
+				 
+				user.setPassword(encoder.encode(password));
 				mailer=" User registered successfully your password is :"+password;
 			}else {
 				tocken=RandomStringUtils.randomAlphanumeric(30);
@@ -157,7 +163,7 @@ public class UserServiceImpl implements UserService{
 		{
 			Integer userId=tocken.getUserId();
 			User user=userdao.getUserById(userId);
-			user.setPassword(password1);
+			user.setPassword(encoder.encode(password1));
 			user.setModifiedBy(userId);
 			user.setDateOfModification(new Date());
 			 rdm=userdao.updateUserOnly(user);
@@ -193,6 +199,23 @@ public class UserServiceImpl implements UserService{
 			return null;
 		}
 		
+	}
+
+	@Override
+	public ResultDataMap updateUser(User user) {
+		
+		return null;
+	}
+
+	@Override
+	public ResultDataMap changePassword(String password2, Integer userId) {
+	
+		User user=userdao.getUserById(userId);
+			user.setPassword(encoder.encode(password2));
+		user.setModifiedBy(userId);
+		user.setDateOfModification(new Date());
+		
+		return userdao.updateUserOnly(user);
 	}
 	
 }
