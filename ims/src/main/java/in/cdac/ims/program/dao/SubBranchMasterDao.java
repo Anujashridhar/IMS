@@ -1,3 +1,21 @@
+package in.cdac.ims.program.dao;
+
+
+import in.cdac.db.program.entity.SubBranchMaster;
+import in.cdac.ims.util.entity.MapObject;
+import in.cdac.ims.util.entity.ResultDataMap;
+import java.util.List;
+
+public interface SubBranchMasterDao {
+	
+	public ResultDataMap saveSubBranch(SubBranchMaster subm);
+	public List<MapObject> getSubBranchList(Integer branchId);
+
+
+}
+
+
+
 /*package in.cdac.ims.program.dao;
 
 import java.util.ArrayList;

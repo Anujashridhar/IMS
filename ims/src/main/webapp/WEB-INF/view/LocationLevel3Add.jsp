@@ -21,7 +21,7 @@
     <div id="page-inner">
 			<h2>${loc3 } Master</h2><br>
 			<br>
-				<form:form class="col s12" action="saveLocationLevel3" method="post" modelAttribute="level3">
+				<form:form class="col s12" action="${pageContext.request.contextPath }/site/admin/saveLocationLevel3" method="post" modelAttribute="level3">
 				       <div class="row">
 					       <div class="col-xs-12 col-sm-6 col-md-4"> 
 								  <div class="card-panel text-center">

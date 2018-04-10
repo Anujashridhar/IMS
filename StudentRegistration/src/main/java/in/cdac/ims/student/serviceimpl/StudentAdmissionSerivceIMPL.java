@@ -3,6 +3,7 @@ package in.cdac.ims.student.serviceimpl;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import in.cdac.auth.user.service.UserService;
@@ -20,6 +21,9 @@ public class StudentAdmissionSerivceIMPL implements StudentAdmissionService {
 	StudentAdmisionDao studentDao;
 	
 	@Autowired
+	PasswordEncoder encoder;
+	
+	@Autowired
 	UserService userService;
 	public ResultDataMap registrationsave(User student, Integer loggedInUserId, String contextPath) 
 	{
@@ -29,11 +33,12 @@ public class StudentAdmissionSerivceIMPL implements StudentAdmissionService {
 		user.setPassword(studentRegisterDetails.getStudentpassword());
 		user.setUserEmail(studentRegisterDetails.getStudentemailid());
 		user.setUserContactNo(studentRegisterDetails.getStudentcontactnumber());*/
+		student.setPassword(encoder.encode(student.getPassword()));
 		student.setUserType(2);
 		rdm=userService.saveUser(student, loggedInUserId, contextPath);
 		if(rdm.getDataObject()==null)
 		{
-			return rdm.setStatus(false).setMessage(Strings.error);
+			return rdm.setStatus(false).setMessage(rdm.getMessage());
 		}else{
 		StudentPersonalDetails studentPersonalDetails=new StudentPersonalDetails();
 		User user=(User)rdm.getDataObject();

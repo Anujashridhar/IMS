@@ -1,6 +1,7 @@
    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 	<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 	<script src="resources/js/programMaster.js"></script>
+	<script src="resources/js/FormSubmit.js"></script>
 <html>
 	<head>
     <meta charset="utf-8" />
@@ -20,7 +21,7 @@
     <div id="page-inner">
 			<h2>Program Details </h2><br>
 			<br>
-				<form:form class="col s12" action="saveProgramDetails" method="post" commandName="program">
+				<form:form class="col s12" id="form" action="${pageContext.request.contextPath }/programme/saveProgramDetails" method="post" modelAttribute="program">
 				       <div class="row">
 					       <div class="col-xs-12 col-sm-6 col-md-4"> 
 								  <div class="card-panel text-center">
@@ -81,14 +82,20 @@
 				    					  </p>
 									</div>
 							</div>
-							<div class="col-xs-12 col-sm-6 col-md-6"> 
+							<div class="col-xs-12 col-sm-6 col-md-4"> 
 									<div class="card-panel text-center">
 										  <p><form:textarea path="eligibility" id="eligibility" class="form-control mustRequired" required="required" /> 
 										      <label for="eligibility">Eligibility</label>
 				    					  </p>
 									</div>
 							</div>
-							
+							<div class="col-xs-12 col-sm-6 col-md-2"> 
+									<div class="card-panel text-center">
+										  <p><form:input path="fees" id="fees" class="form-control mustRequired" required="required" /> 
+										      <label for="fees">Fees</label>
+				    					  </p>
+									</div>
+							</div>
 					   </div>
 					   <button class="btn waves-effect waves-light" type="submit" name="action">Submit
 				   			<i class="material-icons right">send</i>

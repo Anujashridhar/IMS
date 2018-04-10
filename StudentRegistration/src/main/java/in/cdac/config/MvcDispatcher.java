@@ -156,7 +156,7 @@ public class MvcDispatcher implements WebMvcConfigurer {
 	          .addResourceLocations("/resources/"); 
 	    }	
 	    
-	    @Autowired
+	    @Bean
 	    public PasswordEncoder passwordEncoder()
 	    {
 	    	return new BCryptPasswordEncoder();

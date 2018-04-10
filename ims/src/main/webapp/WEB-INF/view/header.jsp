@@ -81,7 +81,10 @@ submitLink:focus {
 <li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
 </li>
 
-<li><a href="${pageContext.request.contextPath }/dashboard/ChangePassword"><i class="fa fa-gear fa-fw"></i> ChangePassword</a>
+<li>
+<%-- <a onclick="getContent('${pageContext.request.contextPath}/dashboard/ChangePassword')" class="waves-effect waves-dark"><i class="fa fa-desktop"></i>ChangePassword</a>
+ --%><a href="${pageContext.request.contextPath}/dashboard/ChangePassword" class="waves-effect waves-dark"><i class="fa fa-desktop"></i>ChangePassword</a>
+
 </li> 
 <li><form:form action="logout" method="post"><input type="submit" class="submitLink" value="logout"></form:form>
 </li>

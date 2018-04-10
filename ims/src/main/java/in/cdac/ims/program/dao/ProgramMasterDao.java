@@ -1,3 +1,17 @@
+package in.cdac.ims.program.dao;
+
+
+import in.cdac.db.program.entity.ProgramMaster;
+import in.cdac.db.program.entity.SubBranchMaster;
+import in.cdac.ims.util.entity.MapObject;
+import in.cdac.ims.util.entity.ResultDataMap;
+import java.util.List;
+
+public interface ProgramMasterDao {
+	
+	public ResultDataMap saveProgramDetails(ProgramMaster prgm);
+}
+
 /*package in.cdac.ims.program.dao;
 
 import java.util.ArrayList;

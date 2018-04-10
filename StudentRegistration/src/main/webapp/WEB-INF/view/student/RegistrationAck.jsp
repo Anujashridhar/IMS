@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Registration</title>
 </head>
-<body>dasfsdfsadfsdafds
-${name }
-${email }
-${phone }
-${status }
-${message }
+<body>
 </body>
 </html>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -24,9 +19,11 @@ ${message }
         <div class="col-sm-6 col-sm-offset-3">
         <br><br> <h2 style="color:#0fad00">Success</h2>
         <img src="http://osmhotels.com//assets/check-true.jpg">
-        <h3>Dear, Faisal khan</h3>
+        <h3>Dear,${name }</h3>
+        <h4>Email : ${email }<br>
+			Phone : ${phone }</h4>
         <p style="font-size:20px;color:#5C5C5C;">${message }</p>
-        <a href="" class="btn btn-success">     Log in      </a>
+        <a href="${pageContext.request.contextPath }/loginForm" class="btn btn-success">  Please Log in  here    </a>
     <br><br>
         </div>
         

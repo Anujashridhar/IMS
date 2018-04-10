@@ -20,7 +20,7 @@
     <div id="page-inner">
 			<h2>${name } Master </h2><br>
 			<br>
-				<form:form class="col s12" action="saveLocationLevel1" method="post" modelAttribute="level1">
+				<form:form class="col s12" action="${pageContext.request.contextPath }/site/admin/saveLocationLevel1" method="post" modelAttribute="level1">
 				       <div class="row">
 					       <div class="col-xs-12 col-sm-6 col-md-4"> 
 								  <div class="card-panel text-center">

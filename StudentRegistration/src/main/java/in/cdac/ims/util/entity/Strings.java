@@ -40,12 +40,19 @@ public class Strings {
 	public static final String NewTockenGenerated = "Returning new Generated tocken";
 	public static final String FailedEmailSend = "Email Could not be sent";
 	public static final String EmailSent = "Email is Sent to your email Id";
+	public static final Object invalidEmail = "EMail is invalid";
+	public static final Object IncorrectOldPassword = "old password entered is not correct";
 	
 	public static String loginToAccess="please login to access requested page";
 	public static String emailVerificationTocken="Email Verification Tocken";
 	public static String InvalidTocken="Invalid Tocken";
 	public static Character ExpiredTocken='E';
 	public static String ExpiredTockenMessage="Tocken is expired";
-
+	public static String PasswordResetTocken="Password Reset Tocken";
+	public static String passwordResetMailSubject="Password Reset";
+	public static String badPassword="password is in bad format or mismatched";
+	public static String passwordChanged="Password is changed Successfully. Please login to continue";
+	public static String studentRegistrationSuccessMessage="you are registeres Successfully.<br> An email verification link is sent to your email Id.<br> please verify your mail before login.";
+	
 
 }

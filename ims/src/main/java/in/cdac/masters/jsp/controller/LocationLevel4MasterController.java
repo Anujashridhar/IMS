@@ -21,23 +21,32 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import in.cdac.db.auth.entity.User;
 import in.cdac.db.masters.entity.MstLocationLevel4;
+import in.cdac.ims.masters.service.CountryMasterService;
+import in.cdac.ims.masters.service.LocationLevel1MasterService;
+import in.cdac.ims.masters.service.LocationLevel2MasterService;
+import in.cdac.ims.masters.service.LocationLevel3MasterService;
+import in.cdac.ims.masters.service.LocationLevel4MasterService;
 import in.cdac.ims.util.entity.MapObject;
 import in.cdac.ims.util.entity.ResultDataMap;
-import in.cdac.masters.dao.CountryMasterDao;
-import in.cdac.masters.dao.LocationLevel3MasterDao;
-import in.cdac.masters.dao.LocationLevel4MasterDao;
 
 @Controller
 @RequestMapping("site/admin/")
 public class LocationLevel4MasterController {
 	
 	@Autowired
-	LocationLevel4MasterDao srd1;
-	@Autowired
-	LocationLevel4MasterDao srd;
+	LocationLevel4MasterService locationLevel4MasterService;
 	
 	@Autowired
-	LocationLevel3MasterDao loclevel3;
+	LocationLevel3MasterService locationLevel3MasterService;
+	
+	@Autowired
+	LocationLevel2MasterService locationLevel2MasterService;
+	
+	@Autowired
+	LocationLevel1MasterService locationLevel1MasterService;
+	
+	@Autowired
+	CountryMasterService cmd;
 	
 	@RequestMapping(value="/ChooseLocationLevel4",method=RequestMethod.GET)
 	public ModelAndView ChooseTemplateForm(HttpServletRequest request,ModelMap map,ModelAndView mav)
@@ -47,15 +56,14 @@ public class LocationLevel4MasterController {
 		
 		
 		MstLocationLevel4 level4 = new MstLocationLevel4();
-		CountryMasterDao srd = new CountryMasterDao();
 		HashMap<Integer, String> countryList=new HashMap<Integer, String>();
-		countryList = srd.getCountryList();
+		countryList = cmd.getCountryList();
 		ArrayList<String> name = new ArrayList<String>();
 		HttpSession session=request.getSession();
 		//LocationLevel4MasterDao srd1 = new LocationLevel4MasterDao();
 		User user=(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Integer userId=user.getUserId();
-	name=srd1.getLocation4Details(userId);
+		name=locationLevel4MasterService.getLocation4Details(userId);
 		String loc1=name.get(0);
 		String loc2=name.get(1);
 		String loc3=name.get(2);
@@ -91,7 +99,7 @@ public class LocationLevel4MasterController {
 		ms.setLocLevel4Code(level4.getLocLevel4Code());
 		ms.setEnteredBy(userId);
 		ms.setModifiedBy(userId);
-		rdm=srd.saveNewLocLevel4(ms);
+		rdm=locationLevel4MasterService.saveNewLocLevel4(ms);
 		System.out.println("saved" + level4.getLocLevel4Name());
 		map.addAttribute("resultDataMap",rdm);
 		mav.setViewName("redirect:/dashboard");
@@ -108,7 +116,7 @@ public class LocationLevel4MasterController {
 		ResultDataMap result=new ResultDataMap();
 		List<MapObject> datamap=new ArrayList<MapObject>();
 	//	LocationLevel3MasterDao loclevel3 = new LocationLevel3MasterDao();
-		datamap = loclevel3.getLocationLevel2List(countryId,locLevel1Id,locLevel2Id);
+		datamap = locationLevel3MasterService.getLocationLevel2List(countryId,locLevel1Id,locLevel2Id);
 		result.setDataMap(datamap);
 		System.out.println("GetLocationLevel3..........");
 		return result;

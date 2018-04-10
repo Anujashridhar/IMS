@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import in.cdac.auth.user.dao.UserDao;
 import in.cdac.auth.user.service.UserService;
 import in.cdac.db.auth.entity.MstRole;
+import in.cdac.db.auth.entity.Tocken;
 import in.cdac.db.auth.entity.User;
 import in.cdac.db.dashboard.entity.MenuGroup;
 import in.cdac.ims.util.entity.Mail;
@@ -110,4 +111,94 @@ public class UserServiceImpl implements UserService{
 		
 		return userdao.getAllUserList();
 	}
+	
+public User getUserByIdOrEmailOrMobile(String userName) {
+		
+		return userdao.getUserByIdOrEmailOrMobile(userName);
+	}
+
+
+public ResultDataMap generatePasswordResetLink(User user, String contextPath) {
+	
+	Tocken tocken=new Tocken();
+	tocken.setGeneratedDate(new Date());
+	tocken.setStatus(Strings.NewTocken);
+	tocken.setTypeOfTocken(Strings.PasswordResetTocken);
+	tocken.setUserId(user.getUserId());
+	tocken.setValidFlag('Y');
+	String tockenNo=RandomStringUtils.randomAlphanumeric(30);
+	tocken.setTocken(tockenNo);
+	ResultDataMap rdm=userdao.saveOrUpdateTocken(tocken);
+	if(rdm.getStatus())
+	{
+		String mailer="  Please click On the Link to verify your email Id <a href='http://"+contextPath+"/resetPassword?tocken_no="+tockenNo+"' ></a>" ;
+		try {
+			new Mail().sendSimpleMail(user.getUserEmail(),mailer, Strings.passwordResetMailSubject);
+			rdm.setMessage("email sent to your email Id please click on the link to reset password ");
+		} catch (Exception e) {
+			rdm.setMessage("email Found, but failed to send email ");
+			e.printStackTrace();
+		}
+	}else {
+		rdm.setMessage(Strings.error);
+
+	}
+	
+	return rdm;
+}
+
+public ResultDataMap resetPassword(String tockenNo, String password1) {
+	ResultDataMap rdm=new ResultDataMap();
+	Tocken tocken=ifValidTocken(tockenNo, Strings.PasswordResetTocken);
+	if(tocken!=null)
+	{
+		Integer userId=tocken.getUserId();
+		User user=userdao.getUserById(userId);
+		user.setPassword(encoder.encode(password1));
+		user.setModifiedBy(userId);
+		user.setDateOfModification(new Date());
+		 rdm=userdao.updateUserOnly(user);
+		if(rdm.getStatus())
+		{
+		tocken.setStatus(Strings.VerifiedTocken);
+		userdao.saveOrUpdateTocken(tocken);
+		rdm.setStatus(true);
+		rdm.setMessage(Strings.savedSuccessfully);
+		}else {
+			rdm.setStatus(false);
+			rdm.setMessage(Strings.error);
+		}
+		
+		
+	}else {
+		rdm.setStatus(false);
+		rdm.setMessage(Strings.InvalidTocken);
+	}
+	return rdm ;
+}
+
+public Tocken ifValidTocken(String tockenNo,String type) {
+	Tocken tocken=userdao.getTockenByTockenNo(tockenNo);
+	if(tocken!=null
+			&& tocken.getTypeOfTocken().equals(type)
+			&& tocken.getStatus().equals(Strings.NewTocken)
+			&& tocken.getValidFlag().equals('Y'))
+	{
+		return tocken;
+	}else {
+		return null;
+	}
+	
+}
+
+public ResultDataMap changePassword(String password2, Integer userId) {
+
+	User user=userdao.getUserById(userId);
+		user.setPassword(encoder.encode(password2));
+	user.setModifiedBy(userId);
+	user.setDateOfModification(new Date());
+	
+	return userdao.updateUserOnly(user);
+}
+
 }

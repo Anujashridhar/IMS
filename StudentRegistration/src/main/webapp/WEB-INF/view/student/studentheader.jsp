@@ -12,7 +12,7 @@
  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/js/header.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -33,6 +33,12 @@
                     </c:forEach>
                     </c:forEach>
                     
+           <form:form id="form-id" method="post" action="${pageContext.request.contextPath}/logout">
+<input type="submit" name="logout" value="Logout">
+</form:form>
+
+
+
 <!--       <li><a href="#">Home</a></li>
       <li><a href="#">Page 1</a></li>
       <li><a href="#">Page 2</a></li>
@@ -46,5 +52,6 @@
       <li><a href="#">Page 3</a></li><li><a href="#">Page 3</a></li>
       <li><a href="#">Page 3</a></li> -->
     </ul>
+
   </div>
 </nav>

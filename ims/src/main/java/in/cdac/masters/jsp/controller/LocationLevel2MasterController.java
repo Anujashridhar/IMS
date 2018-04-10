@@ -21,26 +21,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import in.cdac.db.auth.entity.User;
 import in.cdac.db.masters.entity.MstLocationLevel2;
+import in.cdac.ims.masters.service.CountryMasterService;
+import in.cdac.ims.masters.service.LocationLevel1MasterService;
+import in.cdac.ims.masters.service.LocationLevel2MasterService;
 import in.cdac.ims.util.entity.MapObject;
 import in.cdac.ims.util.entity.ResultDataMap;
-import in.cdac.masters.dao.CountryMasterDao;
-import in.cdac.masters.dao.LocationLevel1MasterDao;
-import in.cdac.masters.dao.LocationLevel2MasterDao;
 
 @Controller
 @RequestMapping("site/admin/")
 public class LocationLevel2MasterController {
-	@Autowired
-	LocationLevel2MasterDao srd1;
 	
 	@Autowired
-	LocationLevel2MasterDao srd;
+	LocationLevel2MasterService locationLevel2MasterService;
 	
 	@Autowired
-	LocationLevel1MasterDao loclevel1;
+	LocationLevel1MasterService locationLevel1MasterService;
 	
 	@Autowired
-	CountryMasterDao cmd;
+	CountryMasterService cmd;
 	
 	@RequestMapping(value="/ChooseLocationLevel2",method=RequestMethod.GET)
 	public ModelAndView ChooseTemplateForm(HttpServletRequest request,ModelMap map,ModelAndView mav)
@@ -54,7 +52,7 @@ public class LocationLevel2MasterController {
 		//LocationLevel2MasterDao srd1 = new LocationLevel2MasterDao();
 		User user= (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Integer usr=user.getUserId();
-		name=srd1.getLocation2Details(usr);
+		name=locationLevel2MasterService.getLocation2Details(usr);
 		String loc1=name.get(0);
 		String loc2=name.get(1);
 		map.addAttribute("loc1", loc1);
@@ -90,7 +88,7 @@ public class LocationLevel2MasterController {
 	
 		ms.setEnteredBy(usr);
 		ms.setModifiedBy(usr);
-		rdm=srd.saveNewLocLevel2(ms);
+		rdm=locationLevel2MasterService.saveNewLocLevel2(ms);
 		System.out.println("saved" + level2.getLocLevel2Name());
 		map.addAttribute("resultDataMap",rdm);
 		mav.setViewName("redirect:/dashboard");
@@ -105,7 +103,7 @@ public class LocationLevel2MasterController {
 		ResultDataMap result=new ResultDataMap();
 		List<MapObject> datamap=new ArrayList<MapObject>();
 		//LocationLevel1MasterDao loclevel1 = new LocationLevel1MasterDao();
-		datamap = loclevel1.getLocationLevel1List(countryId);
+		datamap = locationLevel1MasterService.getLocationLevel1List(countryId);
 		result.setDataMap(datamap);
 		System.out.println("GetLocationLevel1..........");
 		return result;

@@ -28,9 +28,7 @@ public class CountryMasterDaoImpl implements CountryMasterDao {
 	     Session session=sessionFactory.getCurrentSession();
 		 Transaction tx = null;
 	      try{
-	         tx = session.beginTransaction();
-	       
-	         String sql="SELECT countryId,countryName FROM MstCountry where activeFlag='Y' ";
+	        String sql="SELECT countryId,countryName FROM MstCountry where activeFlag='Y' ";
 	          
 	          Query query= session.createQuery(sql);
 	         
@@ -48,8 +46,7 @@ public class CountryMasterDaoImpl implements CountryMasterDao {
 	    	  System.out.println(e);
 	      }
 	      finally {
-	    	  session.close();
-		         session=null;
+	    	 
 	      }
 	      return hs;
 	}
@@ -62,11 +59,10 @@ public class CountryMasterDaoImpl implements CountryMasterDao {
 		try
 		{
 			 session=sessionFactory.getCurrentSession();
-			tx=session.beginTransaction();
 			mc.setActiveFlag('Y');
 			mc.setEntryDate(new Date());
 			session.save(mc);
-			tx.commit();
+	
 		}
 		catch(Exception e)
 		{
@@ -74,8 +70,7 @@ public class CountryMasterDaoImpl implements CountryMasterDao {
 		}
 		finally
 		{
-		 session.close();
-		 session=null;
+		
 		}
 		return rdm;
 

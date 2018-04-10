@@ -2,8 +2,8 @@ $("#countryId").on("change",function(e)
 	{
 	 //alert("hi");
 	 var a=$("#countryId").val();  
-	// alert("country"+a);
-	 getvalues("GetLocationLevel1?countryId="+a, "locLevel1Id");
+	 //alert("country"+a);
+	 getvalues(ctx+"/site/admin/GetLocationLevel1?countryId="+a, "locLevel1Id");
      $("#locLevel1Id").prop("disabled", false);
      //alert("vye");
     });
@@ -21,10 +21,10 @@ function getvalues(url,id)
 			success: function (data) {
 				debugger;//alert(data);
 				var abc = "<option value='0'></option>";
-				for( var a = 0; a<data.datamap.length;a++)
+				for( var a = 0; a<data.dataMap.length;a++)
 					{
-					abc += "<option value='"+data.datamap[a].IntegerKey+"'>"
-					+data.datamap[a].value+"</option>";
+					abc += "<option value='"+data.dataMap[a].IntegerKey+"'>"
+					+data.dataMap[a].value+"</option>";
 					}
 				$("#"+id).html(abc);
 					

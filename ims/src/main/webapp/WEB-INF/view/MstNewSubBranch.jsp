@@ -20,7 +20,7 @@
     <div id="page-inner">
 			<h2>SubBranch Master </h2><br>
 			<br>
-				<form:form class="col s12" action="saveSubBranch" method="post" commandName="subm">
+				<form:form class="col s12" action="${pageContext.request.contextPath }/programme/saveSubBranch" method="post" modelAttribute="subm">
 				       <div class="row">
 					       <div class="col-xs-12 col-sm-6 col-md-4"> 
 								  <div class="card-panel text-center">

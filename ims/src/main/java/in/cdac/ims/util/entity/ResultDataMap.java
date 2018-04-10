@@ -118,7 +118,7 @@ public class ResultDataMap {
 	@Override
 	public String toString() {
 		return "ResultDataMap [status=" + status + ", auth=" + auth + ", userId=" + userId + ", userName=" + userName
-				+ ", message=" + message + ", data=" + data + "]";
+				+ ", message=" + message + ", data=" + data + " dataObject = "+dataObject+" dataMap = "+dataMap+"]";
 	}
 	public String getForwardUrl() {
 		return forwardUrl;

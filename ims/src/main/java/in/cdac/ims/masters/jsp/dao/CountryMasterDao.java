@@ -8,8 +8,8 @@ import in.cdac.db.masters.entity.MstCountry;
 import in.cdac.ims.util.entity.ResultDataMap;
 
 
-@Repository
 public interface CountryMasterDao {
+	
 	public LinkedHashMap<Integer, String> getCountryList() ;
 	public ResultDataMap saveNewCountry(MstCountry mc);
 }

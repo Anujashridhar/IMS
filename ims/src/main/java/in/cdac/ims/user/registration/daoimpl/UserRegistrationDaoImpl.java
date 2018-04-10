@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import in.cdac.db.auth.entity.Tocken;
 import in.cdac.db.auth.entity.User;
-import in.cdac.db.student.entity.StudentRegistrationdetails;
-import in.cdac.ims.student.admission.dao.StudentAdmisionDao;
 import in.cdac.ims.user.registration.dao.UserRegistrationDao;
 import in.cdac.ims.util.entity.ResultDataMap;
 import in.cdac.ims.util.entity.Strings;

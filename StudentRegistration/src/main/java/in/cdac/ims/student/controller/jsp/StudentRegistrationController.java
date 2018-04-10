@@ -99,9 +99,11 @@ public class StudentRegistrationController {
 				redirectAttributes.addAttribute("name",(String)((User)rdm.getDataObject()).getUserContactNo());*/
 				
 				redirectAttributes.addFlashAttribute("redirectedAck","true");
-				
-				redirectAttributes.addFlashAttribute("message",(String)rdm.getMessage());
-				redirectAttributes.addFlashAttribute("status",rdm.getStatus());
+				redirectAttributes.addFlashAttribute("message",Strings.studentRegistrationSuccessMessage);
+				redirectAttributes.addFlashAttribute("name",student.getUserName());
+				redirectAttributes.addFlashAttribute("email",student.getUserEmail());
+				redirectAttributes.addFlashAttribute("phone",student.getUserContactNo());
+				redirectAttributes.addFlashAttribute("status",rdm.getStatus().toString());
 				mav.setViewName("redirect:StudentRegistration");
 			}else {
 				mav.addObject("message",(String)rdm.getMessage());
@@ -115,17 +117,19 @@ public class StudentRegistrationController {
 		@RequestMapping(value="StudentRegistrationAck",method=RequestMethod.GET )
 		public ModelAndView studentRegistrationAck(@RequestParam(value="message",required=false)String message,
 													@RequestParam(value="status",required=false)String status,
-													@RequestParam(value="Email",required=false)String Email,
+													@RequestParam(value="email",required=false)String email,
 													@RequestParam(value="phone",required=false)String phone,
 													@RequestParam(value="name",required=false)String name,
 													ModelAndView mav,
 													HttpServletRequest request)
 		{
-			mav.addObject("message",Strings.savedSuccessfully);
-		/*	mav.addObject("status",status);
-			mav.addObject("Email",Email);
+			
+			
+			mav.addObject("message",message);
+			mav.addObject("status",status);
+			mav.addObject("email",email);
 			mav.addObject("phone",phone);
-			mav.addObject("name",name);*/
+			mav.addObject("name",name);
 			
 			mav.setViewName("student/RegistrationAck");
 			return mav;

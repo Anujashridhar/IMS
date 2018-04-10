@@ -26,7 +26,7 @@ import in.cdac.db.auth.entity.User;
 public class ImsAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	PasswordEncoder encoder;
 	
 	@Autowired
 	HttpSession httpSession;
@@ -48,7 +48,9 @@ public class ImsAuthenticationProvider implements AuthenticationProvider {
     		//request.getSession().setAttribute("errormsg", "");
     		//request.getSession().setAttribute("msgPass", "Bad Credentials.");
             throw new UsernameNotFoundException(authentication.getName()+"not found ");
-        }else if(passwordEncoder.matches(password, user.getPassword()))
+        }else if(encoder.matches(password, user.getPassword()))
+    		
+		//else if(user.getPassword().equals(password))
 				{
         				if(user.getEmailVerifiedFlag()!=null && user.getEmailVerifiedFlag().equals('Y'))
         				{

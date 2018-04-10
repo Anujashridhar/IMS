@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,8 @@ public class PasswordController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired PasswordEncoder encoder;
 
 	ModelAndView mav = new ModelAndView();
 
@@ -116,7 +119,7 @@ public class PasswordController {
 											ModelAndView mav)
 	{
 		User user=(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(user.getPassword().equals(oldPassword))
+		if(encoder.matches(oldPassword, user.getPassword()))
 		{
 			if (password1 != null && password1.trim() != "" && password2 != null && password2.trim() != "" && password1.equals(password2)) 
 			{
@@ -135,13 +138,14 @@ public class PasswordController {
 				mav.setViewName("CustomAck");
 			} else {
 				mav.addObject("message", Strings.badPassword );
+				mav.setViewName("ChangePassword");
 				return mav;
 			}
 			
 			
 		}else {
 			mav.addObject("message", Strings.IncorrectOldPassword );
-			
+			mav.setViewName("ChangePassword");
 		}
 		return mav;
 	}

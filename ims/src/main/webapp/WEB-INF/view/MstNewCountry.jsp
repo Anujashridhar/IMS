@@ -13,16 +13,17 @@
 <body>
     
     
-    	<div id="page-wrapper">
+   <div id="page-wrapper">
 		  <div class="header"> 
           </div>
     
     <div id="page-inner">
 			<h2>Add New Country</h2><br>
+			
 			<br>
 			
             
-                 <form class="col s12" action="saveNewCountry" method="post">
+                 <form:form class="col s12" action="${pageContext.request.contextPath }/site/admin/saveNewCountry" method="post">
 				       <div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4"> 
 									<div class="card-panel text-center">
@@ -42,7 +43,7 @@
 					   <button class="btn waves-effect waves-light" type="submit" name="action">Submit
 				   			<i class="material-icons right">send</i>
 				  	   </button>
-        		</form>
+        		</form:form>
 
      </div>
 

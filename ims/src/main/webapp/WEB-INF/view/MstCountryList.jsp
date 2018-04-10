@@ -29,7 +29,7 @@ $(document).ready(function() {
 			<h2>Country List</h2><br>
 			<br>
 			
-                 <form:form class="col s12" action="saveNewCountry" method="post" commandName="country">
+                 <form:form class="col s12" action="saveNewCountry" method="post" modelAttribute="country">
                  <div class="card-body floating-label">
 				       <div class="row">
 				       
@@ -54,14 +54,16 @@ $(document).ready(function() {
 																					</tr>
 																			</c:if>
 																		<c:set var="count" value="${count+1}"></c:set>
+																		
 																		</c:forEach>
 																		
 																</tbody>
 															  </table>
 																<input type="hidden" id="maxCount" value="${count}" />
+														
 															 </div>
 				       				<div class="row" align="right">
-											   <button class="btn waves-effect waves-light" type="button" onclick=" getContent('ChooseCountry') ">Add
+											   <button class="btn waves-effect waves-light" type="button" onclick=" getContent('${pageContext.request.contextPath}/site/admin/ChooseCountry') ">Add
 										   			<i class="material-icons right">add</i>
 										  	   </button>
 										  	   <button class="btn waves-effect waves-light" type="submit" name="action">Modify

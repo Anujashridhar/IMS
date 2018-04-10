@@ -3,10 +3,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="${pageContext.request.contextPath }/resources/js/studentupdate.js" type="text/javascript"></script>
-
 <div class="container">
+
 <h2>Student Admission</h2>  
+
   <div class="row">
 
     	<section>
@@ -23,7 +23,7 @@
                         </a>
                     </li>
 					</c:if>
-					<c:if test="${activeTab != 'tab1'}">
+					<c:if test="${activeTab!= 'tab1'}">
 					 <li role="presentation" id="tab1" class="disabled">
 					  <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1" aria-expanded="false">
                             <span class="round-tab">
@@ -159,6 +159,12 @@
           </div>
 <div style="margin-top:5%"> 
 <legend>Permant Address Details</legend>
+
+<!-- <div class="checkbox">
+
+  <label><input type="checkbox" value="">Same as Current Address</label>
+</div> -->
+
 </div>
          <div class="form-group" style="padding:1%">
             <label class="col-sm-1 control-label" for="textinput">Line 1</label>
@@ -659,5 +665,7 @@
    </div>
 </div>
 </body>
+<script src="${pageContext.request.contextPath}/resources/js/studentupdate.js" type="text/javascript"></script>
+
 </html>
 

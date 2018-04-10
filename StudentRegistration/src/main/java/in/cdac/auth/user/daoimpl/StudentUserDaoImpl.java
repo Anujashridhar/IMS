@@ -174,6 +174,12 @@ public class StudentUserDaoImpl implements UserDao {
 		
 		return user;
 	}
+	
+	public ResultDataMap saveOrUpdateTocken(Tocken tocken) {
+		sessionFactory.getCurrentSession().saveOrUpdate(tocken);
+
+		return new ResultDataMap().setStatus(true).setMessage(Strings.savedSuccessfully);
+	}
 
 	@SuppressWarnings("unchecked")
 	public Collection<? extends GrantedAuthority> getUserAuthorities(Integer userId) {
@@ -201,6 +207,21 @@ public class StudentUserDaoImpl implements UserDao {
 	public List<User> getAllUserList() {
 		return sessionFactory.getCurrentSession().createQuery("from User",User.class).getResultList();
 		
+	}
+
+public Tocken getTockenByTockenNo(String tockenNo) {
+		
+
+		return sessionFactory.getCurrentSession()
+				.createQuery("from Tocken where tocken=:tockenNo",Tocken.class)
+				.setParameter("tockenNo", tockenNo)
+				.uniqueResult();
+	}
+
+	public ResultDataMap updateUserOnly(User user) {
+		sessionFactory.getCurrentSession().update(user);
+
+		return new ResultDataMap().setStatus(true).setMessage(Strings.savedSuccessfully);
 	}
 
 	

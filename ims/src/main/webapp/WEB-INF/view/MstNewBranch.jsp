@@ -22,7 +22,7 @@
 			<br>
 			
             
-                 <form class="col s12" action="saveNewBranch" method="post">
+                 <form:form class="col s12" action="${pageContext.request.contextPath }/programme/saveNewBranch" method="post">
 				       <div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4"> 
 									<div class="card-panel text-center">
@@ -36,13 +36,16 @@
 										  <p><input name="branchCode" type="text" id="countryCode" />
 										      <label for="branchCode">Branch Code</label>
 				    					  </p>
+					
+					
+					
 									</div>
 							</div>
 					   </div>	
 					   <button class="btn waves-effect waves-light" type="submit" name="action">Submit
 				   			<i class="material-icons right">send</i>
 				  	   </button>
-        		</form>
+        		</form:form>
 
      </div>
 

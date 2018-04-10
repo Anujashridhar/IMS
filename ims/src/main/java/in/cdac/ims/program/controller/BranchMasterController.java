@@ -3,22 +3,30 @@ package in.cdac.ims.program.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import in.cdac.ims.program.beans.db.BranchMaster;
-import in.cdac.ims.program.dao.BranchMasterDao;
+import in.cdac.db.auth.entity.User;
+import in.cdac.db.program.entity.BranchMaster;
+import in.cdac.ims.program.service.BranchService;
 import in.cdac.ims.util.entity.ResultDataMap;
 
 
 @Controller
+@RequestMapping("programme/")
 public class BranchMasterController {
 
+	@Autowired
+	BranchService branchService;
 	
 	
 	@RequestMapping(value="ChooseBranch",method=RequestMethod.GET)
@@ -31,8 +39,8 @@ public class BranchMasterController {
 	
 	
 	@RequestMapping(value="saveNewBranch",method=RequestMethod.POST )
-	public ModelAndView saveSelectedTemplate(@RequestParam("branchName") String branchName,
-											 @RequestParam("branchCode") Integer branchCode,
+	public ModelAndView saveSelectedTemplate(@RequestParam(value="branchName",required=false) String branchName,
+											 @RequestParam(value="branchCode",required=false) Integer branchCode,
 											ModelMap map,ModelAndView mav,
 											RedirectAttributes redirectAttributes,HttpServletRequest request)
 	{
@@ -41,13 +49,14 @@ public class BranchMasterController {
 		System.out.println("in controller" + branchName);
 		ResultDataMap rdm =new ResultDataMap();
 		BranchMaster bm= new BranchMaster();
-		BranchMasterDao srd = new BranchMasterDao();
+		User user=(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Integer userId=user.getUserId();
 		bm.setBranchName(branchName);
 		bm.setBranchCode(branchCode);
-		bm.setEnteredBy((Integer)session.getAttribute("userId"));
-		bm.setModifiedBy((Integer)session.getAttribute("userId"));
+		bm.setEnteredBy(userId);
+		bm.setModifiedBy(userId);
 		System.out.println(bm.getBranchCode());
-		rdm=srd.saveNewBranch(bm);
+		rdm=branchService.saveNewBranch(bm);
 		System.out.println("New branch added successfully");
 		map.addAttribute("resultDataMap",rdm);
 		mav.setViewName("redirect:/dashboard");

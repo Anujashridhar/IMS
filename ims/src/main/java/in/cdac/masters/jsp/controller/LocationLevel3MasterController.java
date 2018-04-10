@@ -21,27 +21,29 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import in.cdac.db.auth.entity.User;
 import in.cdac.db.masters.entity.MstLocationLevel3;
+import in.cdac.ims.masters.service.CountryMasterService;
+import in.cdac.ims.masters.service.LocationLevel1MasterService;
+import in.cdac.ims.masters.service.LocationLevel2MasterService;
+import in.cdac.ims.masters.service.LocationLevel3MasterService;
 import in.cdac.ims.util.entity.MapObject;
 import in.cdac.ims.util.entity.ResultDataMap;
-import in.cdac.masters.dao.CountryMasterDao;
-import in.cdac.masters.dao.LocationLevel2MasterDao;
-import in.cdac.masters.dao.LocationLevel3MasterDao;
 
 @Controller
 @RequestMapping("site/admin/")
 public class LocationLevel3MasterController {
+	 
 	@Autowired
-	LocationLevel3MasterDao srd1;
+	LocationLevel3MasterService locationLevel3MasterService;
 	
 	@Autowired
-	LocationLevel3MasterDao srd;
-	
-	
-	@Autowired
-	LocationLevel2MasterDao loclevel2;
+	LocationLevel2MasterService locationLevel2MasterService;
 	
 	@Autowired
-	CountryMasterDao cmd;
+	LocationLevel1MasterService locationLevel1MasterService;
+	
+	@Autowired
+	CountryMasterService cmd;
+	
 	
 	@RequestMapping(value="/ChooseLocationLevel3",method=RequestMethod.GET)
 	public ModelAndView ChooseTemplateForm(HttpServletRequest request,ModelMap map,ModelAndView mav)
@@ -55,7 +57,7 @@ public class LocationLevel3MasterController {
 		//LocationLevel3MasterDao srd1 = new LocationLevel3MasterDao();
 		User user=(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Integer userId=user.getUserId();
-		name=srd1.getLocation3Details(userId);
+		name=locationLevel3MasterService.getLocation3Details(userId);
 		String loc1=name.get(0);
 		String loc2=name.get(1);
 		String loc3=name.get(2);
@@ -94,7 +96,7 @@ public class LocationLevel3MasterController {
 	
 		ms.setEnteredBy(userId);
 		ms.setModifiedBy(userId);
-		rdm=srd.saveNewLocLevel3(ms);
+		rdm=locationLevel3MasterService.saveNewLocLevel3(ms);
 		System.out.println("saved" + level3.getLocLevel3Name());
 		map.addAttribute("resultDataMap",rdm);
 		mav.setViewName("redirect:/dashboard");
@@ -110,7 +112,7 @@ public class LocationLevel3MasterController {
 		ResultDataMap result=new ResultDataMap();
 		List<MapObject> datamap=new ArrayList<MapObject>();
 		//LocationLevel2MasterDao loclevel2 = new LocationLevel2MasterDao();
-		datamap = loclevel2.getLocationLevel2List(countryId,locLevel1Id);
+		datamap = locationLevel2MasterService.getLocationLevel2List(countryId,locLevel1Id);
 		result.setDataMap(datamap);
 		System.out.println("GetLocationLevel2..........");
 		return result;
