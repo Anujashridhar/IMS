@@ -108,12 +108,12 @@
         </dependency>
  
         <!-- C3PO -->
-        <dependency>
+     <!--   <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>${c3po.version}</version>
         </dependency>
-
+-->
 
 		<!-- javax validations  -->
 		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
