@@ -107,13 +107,13 @@
             <version>${mysql.connector.version}</version>
         </dependency>
  
-        <!-- C3PO -->
-        <dependency>
+       <!-- C3PO -->
+   <!--     <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>${c3po.version}</version>
         </dependency>
-
+-->
 
 		<!-- javax validations  -->
 		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
